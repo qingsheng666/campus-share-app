@@ -1,0 +1,46 @@
+{
+  "name": "campus-share-app",
+  "version": "1.0.0",
+  "description": "校园分享App - 面向国内大学生",
+  "main": "main.js",
+  "scripts": {
+    "dev:mp-weixin": "uni -p mp-weixin",
+    "dev:app": "uni -p app",
+    "dev:h5": "uni -p h5",
+    "build:mp-weixin": "uni build -p mp-weixin",
+    "build:app": "uni build -p app",
+    "build:h5": "uni build -p h5",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@cloudbase/js-sdk": "^2.25.10",
+    "@dcloudio/uni-app": "3.0.0-4080720251210001",
+    "@dcloudio/uni-app-plus": "3.0.0-4080720251210001",
+    "@dcloudio/uni-components": "3.0.0-4080720251210001",
+    "@dcloudio/uni-h5": "3.0.0-4080720251210001",
+    "@dcloudio/uni-mp-weixin": "3.0.0-4080720251210001",
+    "pinia": "^2.1.7",
+    "uview-plus": "^3.2.36",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@dcloudio/types": "3.4.19",
+    "@dcloudio/uni-automator": "3.0.0-4080720251210001",
+    "@dcloudio/uni-cli-shared": "3.0.0-4080720251210001",
+    "@dcloudio/vite-plugin-uni": "3.0.0-4080720251210001",
+    "@vue/runtime-core": "^3.4.21",
+    "@vue/tsconfig": "^0.5.1",
+    "sass": "^1.71.1",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6",
+    "vue-tsc": "^2.0.6"
+  },
+  "browserslist": [
+    "Android >= 4.4",
+    "ios >= 9"
+  ],
+  "uni-app": {
+    "scripts": {}
+  }
+}

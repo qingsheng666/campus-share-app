@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "macaron-pink": "#ffebf2",
+                        "macaron-blue": "#e0f2ff",
+                        "macaron-yellow": "#fff9db",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                        "accent-blue": "#007AFF",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "20px",
+                        "3xl": "24px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+    <title>校唠 - 登录</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative w-full max-w-md min-h-screen mx-auto bg-white dark:bg-slate-900 flex flex-col overflow-hidden">
+
+    <!-- Decorative Background -->
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-macaron-pink rounded-full blur-3xl opacity-60"></div>
+        <div class="absolute top-40 -left-20 w-56 h-56 bg-macaron-blue rounded-full blur-3xl opacity-60"></div>
+        <div class="absolute bottom-20 right-10 w-48 h-48 bg-macaron-yellow rounded-full blur-3xl opacity-60"></div>
+    </div>
+
+    <!-- Header with Back -->
+    <div class="relative z-10 p-6 pt-10">
+        <button class="w-12 h-12 bg-white/70 dark:bg-slate-800/70 backdrop-blur rounded-2xl flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors shadow-sm">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+    </div>
+
+    <!-- Logo & Title -->
+    <div class="relative z-10 px-6 py-2">
+        <div class="flex items-center gap-3 mb-2">
+            <div class="w-14 h-14 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 rounded-3xl flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-3xl text-pink-500">auto_awesome</span>
+            </div>
+        </div>
+        <h1 class="text-5xl font-extrabold tracking-tight leading-tight mb-2">
+            <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">校唠</span>
+        </h1>
+        <p class="text-lg text-slate-500 dark:text-slate-400 font-medium">CAMPUS CHATTER</p>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="relative z-10 px-6 pt-8 pb-4">
+        <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">欢迎回来 👋</h2>
+        <p class="text-slate-500 dark:text-slate-400">登录以继续探索校园精彩</p>
+    </div>
+
+    <!-- Form -->
+    <div class="relative z-10 flex-1 px-6 pt-4 space-y-5">
+
+        <!-- Phone Input -->
+        <div class="space-y-2">
+            <label class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">smartphone</span>
+                手机号
+            </label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <span class="text-slate-400 font-medium">+86</span>
+                </div>
+                <input class="block w-full pl-20 pr-5 py-4 bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-semibold focus:border-blue-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all outline-none placeholder:text-slate-300 dark:placeholder:text-slate-600" placeholder="请输入手机号" type="tel"/>
+            </div>
+        </div>
+
+        <!-- Code Input -->
+        <div class="space-y-2">
+            <label class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">verified_user</span>
+                验证码
+            </label>
+            <div class="flex gap-3">
+                <div class="relative flex-1">
+                    <input class="block w-full pl-5 pr-5 py-4 bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl text-lg font-semibold focus:border-blue-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all outline-none placeholder:text-slate-300 dark:placeholder:text-slate-600" placeholder="000000" type="text"/>
+                </div>
+                <button class="px-5 py-4 bg-macaron-blue text-blue-700 font-bold rounded-2xl hover:bg-macaron-blue/80 transition-colors whitespace-nowrap shadow-sm">
+                    获取验证码
+                </button>
+            </div>
+        </div>
+
+        <!-- Policy Agreement -->
+        <div class="pt-2">
+            <label class="flex items-start gap-3 cursor-pointer">
+                <input class="mt-0.5 h-5 w-5 rounded-xl border-2 border-slate-300 text-blue-500 focus:ring-blue-400 focus:ring-offset-2 cursor-pointer" type="checkbox"/>
+                <span class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    我已阅读并同意
+                    <a class="text-blue-600 dark:text-blue-400 font-semibold underline decoration-2 decoration-blue-200 dark:decoration-blue-800 underline-offset-2" href="#">《用户服务协议》</a>
+                    和
+                    <a class="text-blue-600 dark:text-blue-400 font-semibold underline decoration-2 decoration-blue-200 dark:decoration-blue-800 underline-offset-2" href="#">《隐私权政策》</a>
+                </span>
+            </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-6">
+            <button class="w-full py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-extrabold text-xl rounded-3xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all">
+                立即登录
+            </button>
+        </div>
+
+        <!-- Other Login Options -->
+        <div class="pt-8">
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-slate-200 dark:border-slate-700"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-4 bg-white dark:bg-slate-900 text-slate-400">其他登录方式</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-5 pt-6">
+                <button class="w-14 h-14 bg-macaron-green rounded-2xl flex items-center justify-center hover:bg-macaron-green/80 transition-colors shadow-sm">
+                    <span class="material-symbols-outlined text-2xl text-green-600">chat</span>
+                </button>
+                <button class="w-14 h-14 bg-macaron-blue rounded-2xl flex items-center justify-center hover:bg-macaron-blue/80 transition-colors shadow-sm">
+                    <span class="material-symbols-outlined text-2xl text-blue-600">qq_channel</span>
+                </button>
+                <button class="w-14 h-14 bg-macaron-yellow rounded-2xl flex items-center justify-center hover:bg-macaron-yellow/80 transition-colors shadow-sm">
+                    <span class="material-symbols-outlined text-2xl text-yellow-600">person</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Tagline -->
+    <div class="relative z-10 p-6 pb-10 pt-4">
+        <p class="text-center text-xs text-slate-400 tracking-widest uppercase font-semibold">
+            NO FRILLS. ONLY FUN. ✨
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "macaron-pink": "#ffebf2",
+                        "macaron-blue": "#e0f2ff",
+                        "macaron-yellow": "#fff9db",
+                        "macaron-green": "#d4f5e1",
+                        "macaron-purple": "#e8e1ff",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                        "accent-blue": "#4e7a97",
+                        "active-blue": "#007AFF",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "20px",
+                        "3xl": "24px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 20px rgba(149, 157, 165, 0.08);
+        }
+        .card-shadow {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden">
+
+    <!-- Header with Logo & Search -->
+    <header class="sticky top-0 z-20 bg-white/85 dark:bg-slate-900/85 backdrop-blur-xl px-4 py-4 border-b border-slate-100/60 dark:border-slate-800/60">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-200 to-blue-200 rounded-2xl flex items-center justify-center">
+                    <span class="material-symbols-outlined text-pink-500">auto_awesome</span>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent">校唠</h1>
+            </div>
+            <div class="flex gap-2">
+                <button class="p-2.5 bg-macaron-blue rounded-2xl text-blue-500 hover:bg-macaron-blue/80 transition-colors">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+                <button class="p-2.5 bg-macaron-yellow rounded-2xl text-yellow-600 hover:bg-macaron-yellow/80 transition-colors relative">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Tabs -->
+    <div class="sticky top-[72px] z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg px-4 py-3 border-b border-slate-50 dark:border-slate-800/50">
+        <div class="flex gap-2 overflow-x-auto no-scrollbar">
+            <button class="px-5 py-2.5 rounded-2xl bg-primary text-blue-700 font-bold text-sm whitespace-nowrap shadow-sm">
+                ✨ 推荐
+            </button>
+            <button class="px-5 py-2.5 rounded-2xl bg-macaron-pink/50 text-pink-600 font-medium text-sm whitespace-nowrap hover:bg-macaron-pink/70 transition-colors">
+                🔥 最新
+            </button>
+            <button class="px-5 py-2.5 rounded-2xl bg-macaron-yellow/50 text-yellow-700 font-medium text-sm whitespace-nowrap hover:bg-macaron-yellow/70 transition-colors">
+                🎓 本校
+            </button>
+            <button class="px-5 py-2.5 rounded-2xl bg-macaron-green/50 text-green-700 font-medium text-sm whitespace-nowrap hover:bg-macaron-green/70 transition-colors">
+                👀 关注
+            </button>
+        </div>
+    </div>
+
+    <!-- Hot Banner -->
+    <div class="px-4 pt-4">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 p-4 text-white custom-shadow">
+            <div class="absolute -right-8 -top-8 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
+            <div class="absolute -left-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="material-symbols-outlined text-lg">local_fire_department</span>
+                    <span class="text-xs font-bold uppercase tracking-wider opacity-90">全高校热榜 · TOP 1</span>
+                </div>
+                <h3 class="font-bold text-lg leading-tight">某高校惊现超大流浪猫，全校围观</h3>
+                <div class="flex items-center justify-between mt-2">
+                    <span class="text-xs opacity-90">热度 99.8k</span>
+                    <span class="bg-white/25 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">查看榜单 →</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Feed -->
+    <main class="flex-1 px-4 pt-4 pb-32 space-y-4">
+
+        <!-- Post Card 1 -->
+        <article class="bg-white dark:bg-slate-800 rounded-3xl card-shadow overflow-hidden border border-slate-100 dark:border-slate-700">
+            <div class="p-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-macaron-blue flex items-center justify-center overflow-hidden">
+                        <img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoyaPwc_Y8XYJoyd93iIJvhLvKvh9b1CIRxXWb_Fi-hOzizWjHm8AJxQkPCNVTe9fOmMo02dAu1hVt8yoq6ErFZ_m4MskvETMja5hpGVeGkHi_qeHGW7SmQ9JODxwI3aHLhuXVcYvccjXvdy6GWIYSkocuUrsqeQMeFAVE5w3F5xFoE5B_uCY0AReCrk18TebeRY7OXhbaeZlSRFCX-5UTNWTEs7iDJhD0V45uFsI0t4KqVagYyflt9N9AWh9ZaL0afJcaeYd-NoY"/>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">@大耳狗学长</p>
+                        <p class="text-xs text-slate-400">5分钟前 · 华南理工大学</p>
+                    </div>
+                    <button class="px-4 py-1.5 rounded-xl bg-primary text-blue-700 font-semibold text-sm hover:bg-primary/80 transition-colors">
+                        关注
+                    </button>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                    今天在图书馆二楼捡到一个哆啦A梦的挂件，是谁掉的呀？我在前台放着啦，快去认领吧！✨
+                </p>
+                <div class="rounded-2xl overflow-hidden mb-4 h-52 bg-slate-100">
+                    <img alt="Post image" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfuRiqDUkvK8TfWdeU1i4rKqsyJ7k4kNf1N_5SFB2mzwKn704GGO3xLt6BJ7mf1_uINexhg_3K4BgflCL2X4_ZqU9Km4rcSjHWkMh2xkYqLc1XW9xmG_sUcLciNWK3osxfiOnyF7q6ohCep-Jrws4gwZ46xoYnv6ONK478eLzlr3k05bTh7GElUqGVyCT4GRMkZQtER4lmCOJEus8ac-INCz80QHuZNnTt2MHotT10XLKW6D4aOIYdv6Z6oITIyd5fLG7EKOB8sDc"/>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-macaron-yellow/50 text-yellow-700 text-xs font-medium">📚 失物招领</span>
+                        <span class="px-3 py-1 rounded-full bg-macaron-pink/50 text-pink-600 text-xs font-medium">💕 暖心</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-pink/30 rounded-2xl text-pink-500 hover:bg-macaron-pink/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">favorite</span>
+                            <span class="text-xs font-bold">520</span>
+                        </button>
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-blue/30 rounded-2xl text-blue-500 hover:bg-macaron-blue/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chat_bubble</span>
+                            <span class="text-xs font-bold">12</span>
+                        </button>
+                        <button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+                            <span class="material-symbols-outlined text-lg">share</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post Card 2 - No Image -->
+        <article class="bg-white dark:bg-slate-800 rounded-3xl card-shadow overflow-hidden border border-slate-100 dark:border-slate-700">
+            <div class="p-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-macaron-yellow flex items-center justify-center overflow-hidden">
+                        <img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8IDJi5vmOGwd9oUnz9hGpeWqq1OdXh2yNdZ4652Yme4zY8QWraAIt1GvMjLmFV_ai-2vRlVWY8ysN469cuwx7NNxhJ9oNZo8kCttSldRXhCGBrD5pCmLjSziifU5b-hn0cFbSf3qN55Kax42Zi8lRrNSH_OmkHx9TVVOqOYydzgHgqntS1TlddoZjme58EMgxc8wNltNdkwirl0KCE_CRVBjKejCpi6oAhjM5Gx5GGwksGPIpRXFXnoQbj1diVDLCuHlT-E3y8Dk"/>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">@美少女战士</p>
+                        <p class="text-xs text-slate-400">15分钟前 · 华南理工大学</p>
+                    </div>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                    西苑二食堂的那个糖醋里脊真的绝了！今天又是被美食治愈的一天，有没有uu一起拼单奶茶的？🧋
+                </p>
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-macaron-pink/50 text-pink-600 text-xs font-medium">🍱 美食</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-pink/30 rounded-2xl text-pink-500 hover:bg-macaron-pink/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">favorite</span>
+                            <span class="text-xs font-bold">1.2k</span>
+                        </button>
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-blue/30 rounded-2xl text-blue-500 hover:bg-macaron-blue/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chat_bubble</span>
+                            <span class="text-xs font-bold">88</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Post Card 3 - Multi Image Grid -->
+        <article class="bg-white dark:bg-slate-800 rounded-3xl card-shadow overflow-hidden border border-slate-100 dark:border-slate-700">
+            <div class="p-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-macaron-green flex items-center justify-center overflow-hidden">
+                        <img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG1ugQE6A9GKnARS6MlnIg5bjuNaYQ0k215KmXY4vL-lTH1qG_O64Z1I0fEJqwhggrXY3KelAE1nCsOlUe5qsEqhISrcZK81T7zHydY8TGJw-hTEpoShwiWfBfi3Ca9P_0LyWPgdc35midCu6C6KQwibd1LaaEGqVMwidtm1q4SF0w3B5leoLwJ6tmr3UAe3TsvFawZoW9MU1zydaVvg_Y-JtWG4FbVwSK91au53mzmL4gsNWzabTbmkkvKFjqyuBw6PjI6y-wvnw"/>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">@篮球狂热者</p>
+                        <p class="text-xs text-slate-400">30分钟前 · 虎扑体育</p>
+                    </div>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                    今天在球场打球，遇到一个很厉害的对手，大家看我这个操作怎么样？有没有人一起组队打球的？周末约起来啊兄弟们！🔥🔥🔥
+                </p>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-slate-100">
+                        <img alt="Basketball 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChJItEJV0Xb08feiymUjlFuNppfrQAvgHsvnb2kgxchzvlzyb6G-O9rDMP6_bRALVQjss5sTxgMQHKl5K51p9DJm8wnz2MJTZs0z2sTU_t-xf9LUkLYp2sD05r9908vQaA0LYmaT_sb52vnRDOhjDGNRGUmG8vrjQYP5PDwpbGEYnoFltdqvfWLF6ptajZWfkv19BtO-pWbmSf1-6auNCYxWtNyKeAzSFzzVITsTh28R2-e4cp7YZ-py_w8W2gC1Z_Y3dBcWHioCI"/>
+                    </div>
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-slate-100">
+                        <img alt="Basketball 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtlYeVjj9IDucWqUmKxnhZ4dhp-lhD_wNZi51ESZ0-syVQKtcrjfwURwutSK1OaYQ2Pd8qmhl_yxtrxi2kks-_Q4B1i0FxAzfehjfUE3zWhksGkXX02iBPFAHAZIWtFFfReUT5yG0isEgw7qXa7VApOKj-6XAoVc8JlwiVe1s-gLl8MEpqsbAt7I9A4M4Vr8X2MJpNNJ_H93sqgcmFIqtOaex4CN9ICBn9jXRrXgcfIu8m3Hy3X2XdcENjBsHDSbj-M-YM5DnAPiI"/>
+                    </div>
+                    <div class="aspect-square rounded-2xl overflow-hidden bg-slate-100 relative">
+                        <img alt="Basketball 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUqoEFgPD4ZYIyhupBfiSJ6qxJn7YbPY0j2UXaP7w4_3NNXd5mROnM5huNaW0K0CiHP7aAELDwesKcDxV98bInWyVI_2wOMxc8UmkTBA9UfQhvm5QJvhuaFUyYDTM3_zaX5SbsaJgWeTYVjIyJFcq4xO_Ef020_VVXKYazxDTW6DaihqHLlpAVCimfAbZ5kr-FcMe9AHEIhQ4nj9_1t6w2nSDe96ZuEPT3Wc_hcwR4a9Pmc7fW6eszlCodtz80O4y2-g4SnXsM4_o"/>
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">+6</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 rounded-full bg-macaron-green/50 text-green-700 text-xs font-medium">🏀 运动</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-pink/30 rounded-2xl text-pink-500 hover:bg-macaron-pink/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">favorite</span>
+                            <span class="text-xs font-bold">1.2k</span>
+                        </button>
+                        <button class="flex items-center gap-1.5 px-3 py-2 bg-macaron-blue/30 rounded-2xl text-blue-500 hover:bg-macaron-blue/50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chat_bubble</span>
+                            <span class="text-xs font-bold">456</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Floating Create Button -->
+    <button class="fixed right-5 bottom-[88px] z-40 w-14 h-14 bg-gradient-to-r from-blue-500 to-pink-500 rounded-3xl shadow-lg flex items-center justify-center text-white active:scale-95 transition-transform custom-shadow">
+        <span class="material-symbols-outlined text-3xl">add</span>
+    </button>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-100/70 dark:border-slate-800/70 px-2 pb-safe pt-2 z-30">
+        <div class="flex items-center justify-around h-14">
+            <!-- Home -->
+            <a class="flex flex-1 flex-col items-center justify-center gap-0.5" href="#">
+                <div class="w-12 h-11 rounded-2xl bg-macaron-blue flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[26px] text-blue-600" style="font-variation-settings: 'FILL' 1">menu_book</span>
+                </div>
+                <span class="text-[11px] font-bold text-blue-600">校园墙</span>
+            </a>
+            <!-- Hot List -->
+            <a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+                <div class="w-12 h-11 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[26px]">local_fire_department</span>
+                </div>
+                <span class="text-[11px] font-medium">热榜</span>
+            </a>
+            <!-- Spacer for floating button -->
+            <div class="flex-1"></div>
+            <!-- Messages -->
+            <a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+                <div class="w-12 h-11 flex items-center justify-center relative">
+                    <span class="material-symbols-outlined text-[26px]">mail</span>
+                    <span class="absolute top-2 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+                </div>
+                <span class="text-[11px] font-medium">消息</span>
+            </a>
+            <!-- Profile -->
+            <a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+                <div class="w-12 h-11 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[26px]">account_circle</span>
+                </div>
+                <span class="text-[11px] font-medium">我的</span>
+            </a>
+        </div>
+    </nav>
+
+</div>
+</body>
+</html>

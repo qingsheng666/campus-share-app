@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "accent-pink": "#ffdef2",
+                        "accent-yellow": "#fff4cc",
+                        "accent-green": "#d4f5e1",
+                        "accent-purple": "#e8e1ff",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .macaron-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.05);
+        }
+        .tag-checkbox:checked + label {
+            background-color: #e3f2fc;
+            border-color: #94cbf7;
+            transform: scale(1.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-md mx-auto overflow-x-hidden bg-white dark:bg-slate-900 shadow-xl">
+<!-- Header -->
+<div class="flex items-center p-4 pt-6 justify-between">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/30 text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight flex-1 text-center pr-10">完善个人信息</h2>
+</div>
+<!-- Progress Indicator -->
+<div class="px-6 py-2 flex gap-2">
+<div class="h-1.5 flex-1 rounded-full bg-primary"></div>
+<div class="h-1.5 flex-1 rounded-full bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div class="flex flex-col gap-6 p-6">
+<!-- Avatar Upload Section -->
+<div class="flex flex-col items-center gap-4">
+<div class="relative group cursor-pointer">
+<div class="bg-accent-pink aspect-square rounded-full min-h-32 w-32 border-4 border-white dark:border-slate-800 shadow-lg flex items-center justify-center overflow-hidden" data-alt="User profile avatar upload placeholder with pink background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJ5iq6gRrHULvRs3CGnPhL39mV-_rMpBTsTJ_jYCrTxA7MtlCnmJjnq_9oNzkOjTWjM-Ejq3eI6NzCJtcstaCb2-Sgmxh-PNnokfBBVMAAFNbb3XMMKmDqUfdwdv8RBeDsDWg2_pRyk-lbR2Kw46fKlPjYRlzGPnkHpMU8Cb9xDbUmaIdBPzZquRaHyRznznWb-vbQyflJStpvM4ZVFtvslU1idsMaVhFY4dorSAtYPq-X_fXoLxMxoLG7Q6tT24PWzbDn3sqHnYI"); background-size: 40% 40%; background-position: center; background-repeat: no-repeat;'>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary p-2 rounded-full border-2 border-white dark:border-slate-800 shadow-md">
+<span class="material-symbols-outlined text-slate-700 text-sm">photo_camera</span>
+</div>
+</div>
+<div class="text-center">
+<p class="text-lg font-bold">点击上传头像</p>
+<p class="text-slate-500 text-sm">支持 JPG/PNG 格式</p>
+</div>
+</div>
+<!-- Form Fields -->
+<div class="flex flex-col gap-5">
+<!-- Nickname -->
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold px-1 text-slate-700 dark:text-slate-300 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">person</span> 昵称
+                    </span>
+<input class="w-full rounded-xl border-2 border-slate-100 bg-slate-50 dark:bg-slate-800 dark:border-slate-700 p-4 text-base focus:border-primary focus:ring-0 transition-colors" placeholder="输入你的趣味昵称" value=""/>
+</label>
+<!-- School Selection -->
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold px-1 text-slate-700 dark:text-slate-300 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">school</span> 选择学校
+                    </span>
+<div class="relative">
+<select class="w-full appearance-none rounded-xl border-2 border-slate-100 bg-slate-50 dark:bg-slate-800 dark:border-slate-700 p-4 pr-10 text-base focus:border-primary focus:ring-0 transition-colors">
+<option disabled="" selected="" value="">选择你的高校</option>
+<option value="tsinghua">清华大学</option>
+<option value="pku">北京大学</option>
+<option value="fudan">复旦大学</option>
+<option value="sjtu">上海交通大学</option>
+<option value="zju">浙江大学</option>
+<option value="other">其他学校</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</label>
+<!-- Grade Selection -->
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold px-1 text-slate-700 dark:text-slate-300 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span> 年级选择
+                    </span>
+<div class="relative">
+<select class="w-full appearance-none rounded-xl border-2 border-slate-100 bg-slate-50 dark:bg-slate-800 dark:border-slate-700 p-4 pr-10 text-base focus:border-primary focus:ring-0 transition-colors">
+<option disabled="" selected="" value="">选择当前年级</option>
+<option value="fr">大一</option>
+<option value="so">大二</option>
+<option value="jr">大三</option>
+<option value="sr">大四</option>
+<option value="m1">研一</option>
+<option value="m2">研二</option>
+<option value="m3">研三</option>
+<option value="other">其他</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</label>
+<!-- Interest Tags -->
+<div class="flex flex-col gap-3 pt-2">
+<span class="text-sm font-bold px-1 text-slate-700 dark:text-slate-300 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> 兴趣标签 (可多选)
+                    </span>
+<div class="flex flex-wrap gap-2">
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-study" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-accent-yellow/40 border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-accent-yellow/60" for="tag-study">
+                                📚 学习
+                            </label>
+</div>
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-sport" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-accent-green/40 border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-accent-green/60" for="tag-sport">
+                                🏀 运动
+                            </label>
+</div>
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-food" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-accent-pink/40 border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-accent-pink/60" for="tag-food">
+                                🍱 美食
+                            </label>
+</div>
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-play" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-accent-purple/40 border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-accent-purple/60" for="tag-play">
+                                🎮 娱乐
+                            </label>
+</div>
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-job" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-primary border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-primary/80" for="tag-job">
+                                💼 求职
+                            </label>
+</div>
+<div class="relative">
+<input class="tag-checkbox hidden" id="tag-travel" type="checkbox"/>
+<label class="flex items-center gap-1 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 border-2 border-transparent text-sm font-medium cursor-pointer transition-all hover:bg-slate-200" for="tag-travel">
+                                ✈️ 旅游
+                            </label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Button -->
+<div class="mt-auto p-6 pb-10">
+<button class="w-full bg-primary hover:bg-blue-200 text-slate-800 font-bold py-4 rounded-2xl macaron-shadow border-2 border-slate-900 transition-transform active:scale-95 flex items-center justify-center gap-2">
+                进入校园
+                <span class="material-symbols-outlined">rocket_launch</span>
+</button>
+<p class="text-center text-xs text-slate-400 mt-4">完成注册即代表同意《用户服务协议》</p>
+</div>
+<!-- Decorative Elements -->
+<div class="fixed top-20 -right-10 w-24 h-24 bg-accent-yellow/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="fixed bottom-40 -left-10 w-32 h-32 bg-accent-pink/20 rounded-full blur-3xl pointer-events-none"></div>
+</div>
+</body></html>

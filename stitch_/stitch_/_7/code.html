@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>校唠 - 个人中心</title>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden">
+<header class="flex items-center justify-between p-4 sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-10">
+<div class="w-10"></div>
+<h1 class="text-lg font-bold">我的</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">qr_code_2</span>
+</button>
+</header>
+<div class="px-6 py-4">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="size-20 rounded-full bg-primary border-4 border-white dark:border-slate-800 shadow-sm bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCEV8aInt0pFoP3Q1ow3C1QFfwgb4fDrDu1aRrf1XKAq2QyUgQfL2ElV0CAWA4TuLiNMmyOAMywiece4gsDYNE_vCYe8CSsAdCINJHdLqhMBksBQmpuhX1yq0NwDU16EeUl2zuqcJeBfyoJ4qMtYwBJFYC85D4jQ2SA_6JST1GgiwbAz01tzo9zaeZdXqAKOJ5pVp02kUK7GMmG3s3CoUQLL4eCeFGVvUbhH45OPtcrAlfxxnJ5NSo7z2IRNPZRSQMEWfQiIXFAnQ')">
+</div>
+<div class="absolute bottom-0 right-0 size-6 bg-yellow-400 border-2 border-white dark:border-slate-800 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white font-bold">star</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h2 class="text-xl font-bold leading-tight">用户昵称示例</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">华南理工大学</p>
+<div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-primary/30 text-xs font-medium text-slate-600 dark:text-slate-300">
+                    会员有效期：2024-12-31
+                </div>
+</div>
+</div>
+</div>
+<div class="px-4 mt-4">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-5 text-white shadow-lg">
+<div class="relative z-10">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs uppercase tracking-wider opacity-80 font-bold">Premium Membership</p>
+<h3 class="text-lg font-bold mt-1">开通会员尊享特权</h3>
+<p class="text-sm mt-1 opacity-90">低至 <span class="text-xl font-bold">1元</span> / 月</p>
+</div>
+<button class="bg-white text-indigo-600 px-4 py-2 rounded-xl text-sm font-bold shadow-sm active:scale-95 transition-transform">
+                        立即开通
+                    </button>
+</div>
+<div class="mt-4 flex gap-4 text-[10px] opacity-80">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">verified</span> 身份标识</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">edit_note</span> 专属表情</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">visibility_off</span> 匿名特权</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 size-32 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 px-4 mt-6">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-slate-100 dark:border-slate-800">
+<p class="text-xl font-bold">24</p>
+<p class="text-xs text-slate-500 mt-1">获赞</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-slate-100 dark:border-slate-800">
+<p class="text-xl font-bold">128</p>
+<p class="text-xs text-slate-500 mt-1">粉丝</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl text-center border border-slate-100 dark:border-slate-800">
+<p class="text-xl font-bold">56</p>
+<p class="text-xs text-slate-500 mt-1">关注</p>
+</div>
+</div>
+<div class="mt-6 px-4 space-y-1 mb-24">
+<a class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/30 rounded-xl hover:bg-primary/20 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">article</span>
+<span class="font-medium">我的帖子</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/30 rounded-xl hover:bg-primary/20 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500">chat_bubble</span>
+<span class="font-medium">我的评论</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/30 rounded-xl hover:bg-primary/20 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-orange-500">campaign</span>
+<span class="font-medium">举报反馈</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<div class="h-4"></div>
+<a class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/30 rounded-xl hover:bg-primary/20 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500">settings</span>
+<span class="font-medium">设置</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<button class="w-full flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/10 rounded-xl hover:bg-red-100 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-500">logout</span>
+<span class="font-medium text-red-600 dark:text-red-400">注销账号</span>
+</div>
+</button>
+<div class="pt-6 pb-4 flex flex-col items-center gap-3 opacity-60">
+<p class="text-xs text-slate-400">支持以下支付方式开通会员</p>
+<div class="flex gap-4">
+<div class="flex items-center gap-1 grayscale">
+<span class="material-symbols-outlined text-blue-500">payments</span>
+<span class="text-xs font-medium">支付宝</span>
+</div>
+<div class="flex items-center gap-1 grayscale">
+<span class="material-symbols-outlined text-emerald-500">account_balance_wallet</span>
+<span class="text-xs font-medium">微信支付</span>
+</div>
+</div>
+</div>
+</div>
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-slate-100 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-2 py-2 pb-5 z-20">
+<div class="flex justify-around items-center h-12">
+<a class="flex flex-col items-center justify-center w-full h-full text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] mt-0.5">校园墙</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">trending_up</span>
+<span class="text-[10px] mt-0.5">热榜</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">add_circle</span>
+<span class="text-[10px] mt-0.5">发帖</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-slate-400 transition-colors" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-[24px]">chat_bubble</span>
+<span class="absolute -top-0.5 -right-0.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</div>
+<span class="text-[10px] mt-0.5">消息</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full" href="#">
+<div class="flex flex-col items-center justify-center px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/80 text-blue-500 transition-all">
+<span class="material-symbols-outlined fill-1 text-[24px]">person</span>
+<span class="text-[10px] font-bold mt-0.5">我的</span>
+</div>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

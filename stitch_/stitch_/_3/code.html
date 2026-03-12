@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Creation App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#E3F2FD",
+          "background-light": "#F8FAFC",
+          "background-dark": "#0F172A",
+          "card-light": "#FFFFFF",
+          "card-dark": "#1E293B",
+          "text-main-light": "#0F172A",
+          "text-main-dark": "#F8FAFC",
+          "text-muted-light": "#64748B",
+          "text-muted-dark": "#94A3B8",
+          "accent-dark": "#0B1120"
+        },
+        fontFamily: {
+          display: ["Noto Sans SC", "sans-serif"],
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          'xl': "1rem",
+          '2xl': "1.5rem"
+        },
+      },
+    },
+  };
+</script>
+<style>.bg-dots-light {
+    background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .dark .bg-dots-dark {
+    background-image: radial-gradient(#334155 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display h-screen flex justify-center items-center">
+<div class="relative w-full max-w-md h-[850px] bg-white dark:bg-gray-900 overflow-hidden shadow-2xl sm:rounded-[2rem] sm:border-8 border-gray-800 dark:border-gray-700 bg-dots-light dark:bg-dots-dark flex flex-col">
+<header class="flex items-center justify-between px-4 py-4 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+<div class="flex items-center space-x-2">
+<button class="text-text-main-light dark:text-text-main-dark hover:bg-gray-100 dark:hover:bg-gray-800 p-1 rounded-full transition-colors">
+<span class="material-icons">close</span>
+</button>
+<h1 class="text-lg font-bold">发布帖子</h1>
+</div>
+<button class="bg-primary text-[#0284C7] font-medium px-4 py-1.5 rounded-full text-sm shadow-sm hover:opacity-90 transition-opacity">
+        发出去啦
+      </button>
+</header>
+<main class="flex-1 overflow-y-auto px-4 pb-24 z-10 hide-scrollbar">
+<div class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm mb-4 min-h-[150px]">
+<div class="flex items-start space-x-3">
+<div class="w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0">
+<span class="text-xl">🍍</span>
+</div>
+<textarea class="w-full bg-transparent border-none resize-none focus:ring-0 p-0 text-text-main-light dark:text-text-main-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark mt-2" placeholder="输入最多1000字" rows="4"></textarea>
+</div>
+</div>
+<div class="flex space-x-3 mb-6">
+<div class="relative w-24 h-24 rounded-xl overflow-hidden bg-[#FDF6E3] dark:bg-amber-900/20 shadow-sm">
+<img alt="Tote bag" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi3i0a0Cp9pk8ByUDmtHw5u1-DHToi7Ek7V6fe3tsdFhUjhzUGUp2TyGpUX7z701_nDSuIH8AITRIHh_rKzSBnBwvRzMYARM9_GiYGci4o8bZFdCtkDa4RRp5QR1vq9AGIwl2lKgOBSl_eTlzzkus-43rnAQrb0HGykqy0mWOoW2bicjpZ-zjSe2kOK1J5uhyL7GeUAF2CcZl9wos8qkPgo6PjVbOk17u5WvOuKq67UqcqdybLGlEsK3BcMScEU0uONMR7zKiwK0k"/>
+<button class="absolute top-1 right-1 w-5 h-5 bg-black/50 rounded-full flex items-center justify-center text-white">
+<span class="material-icons text-[12px]">close</span>
+</button>
+</div>
+<button class="w-24 h-24 rounded-xl border-2 border-dashed border-[#E0F2FE] dark:border-sky-900/50 bg-[#F0F9FF]/50 dark:bg-sky-900/20 flex flex-col items-center justify-center text-sky-400 dark:text-sky-500 hover:bg-[#F0F9FF] dark:hover:bg-sky-900/40 transition-colors">
+<span class="material-icons mb-1">add_photo_alternate</span>
+<span class="text-xs">1/9</span>
+</button>
+</div>
+<div class="flex items-center space-x-4 mb-8 text-text-muted-light dark:text-text-muted-dark">
+<button class="flex items-center space-x-1 hover:text-text-main-light dark:hover:text-text-main-dark transition-colors">
+<span class="material-icons text-lg">tag</span>
+<span class="text-sm">话题</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-text-main-light dark:hover:text-text-main-dark transition-colors">
+<span class="material-icons text-lg">location_on</span>
+<span class="text-sm">添加地点</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-text-main-light dark:hover:text-text-main-dark transition-colors">
+<span class="material-icons text-lg">sentiment_satisfied_alt</span>
+<span class="text-sm">表情</span>
+</button>
+</div>
+<div class="bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 border border-pink-100 dark:border-pink-800/30 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-icons text-6xl">favorite</span>
+</div>
+<div class="flex items-start space-x-3 mb-4 relative z-10">
+<div class="w-10 h-10 rounded-full bg-pink-200 dark:bg-pink-800 flex items-center justify-center flex-shrink-0">
+<span class="material-icons text-white">workspace_premium</span>
+</div>
+<div>
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark">会员专属特权</h3>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-0.5">开通会员即可发帖/评论，最低1元/月哦😎</p>
+</div>
+</div>
+<button class="w-full bg-[#111827] dark:bg-white text-white dark:text-gray-900 font-bold py-3 rounded-xl shadow-md hover:bg-black dark:hover:bg-gray-100 transition-colors relative z-10">
+          立即开通
+        </button>
+</div>
+<div class="absolute left-6 bottom-32 opacity-20 text-pink-300 dark:text-pink-800">
+<span class="material-icons text-4xl">star</span>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-primary/30 px-2 pb-6 pt-3 flex items-end justify-between z-30">
+<!-- Campus Wall -->
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">menu_book</span>
+</div>
+<span class="text-[10px] font-medium">校园墙</span>
+</a>
+<!-- Hot List -->
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">leaderboard</span>
+</div>
+<span class="text-[10px] font-medium">热榜</span>
+</a>
+<!-- Central Action Button (Active) -->
+<div class="flex-1 flex flex-col items-center">
+<button class="w-10 h-10 bg-blue-400 text-white rounded-full shadow-md flex items-center justify-center transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<span class="text-[10px] font-medium text-blue-400 mt-1">发帖</span>
+</div>
+<!-- Messages -->
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">mail</span>
+</div>
+<span class="text-[10px] font-medium">消息</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+</div>
+<span class="text-[10px] font-medium">我的</span>
+</a>
+</nav>
+</div>
+<style>.hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }.hide-scrollbar {
+      -ms-overflow-style: none;scrollbar-width: none;}
+  </style>
+</body></html>

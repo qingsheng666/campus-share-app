@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Noto+Sans+SC:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#359EFF", accent: "#000000", "background-light": "#f5f7f8", "background-dark": "#0f1923"}, fontFamily: {display: "Plus Jakarta Sans"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<title>校唠 - 登录</title>
+<style type="text/tailwindcss">
+        * {
+            border-radius: 0 !important;
+        }
+        input::placeholder {
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white font-display text-black min-h-screen flex items-start justify-center p-0">
+<div class="relative w-full max-w-[480px] min-h-screen border-x-4 border-black bg-white flex flex-col">
+<div class="p-6 border-b-4 border-black">
+<div class="flex items-center mb-8">
+<div class="border-2 border-black p-2 hover:bg-black hover:text-white transition-colors cursor-pointer">
+<span class="material-symbols-outlined block">arrow_back</span>
+</div>
+</div>
+<h1 class="text-6xl font-black uppercase tracking-tighter leading-none mb-2">校唠</h1>
+<p class="text-xl font-bold border-t-2 border-black pt-2 uppercase tracking-tight">CAMPUS CHATTER / LOGIN</p>
+</div>
+<div class="flex-1 p-6 space-y-0">
+<h2 class="text-3xl font-black mb-10 bg-black text-white inline-block px-4 py-1">欢迎登录 / WELCOME</h2>
+<div class="space-y-8">
+<div class="flex flex-col">
+<label class="text-lg font-black uppercase mb-2">手机号 / PHONE</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none border-r-4 border-black pr-4">
+<span class="material-symbols-outlined font-bold">smartphone</span>
+</div>
+<input class="block w-full pl-20 pr-4 py-6 border-4 border-black text-2xl font-black focus:bg-black focus:text-white transition-all outline-none" placeholder="11位手机号" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="text-lg font-black uppercase mb-2">验证码 / CODE</label>
+<div class="flex flex-col gap-4">
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none border-r-4 border-black pr-4">
+<span class="material-symbols-outlined font-bold">verified_user</span>
+</div>
+<input class="block w-full pl-20 pr-4 py-6 border-4 border-black text-2xl font-black focus:bg-black focus:text-white transition-all outline-none" placeholder="000000" type="text"/>
+</div>
+<button class="w-full py-4 border-4 border-black bg-white text-black font-black text-xl hover:bg-black hover:text-white transition-colors uppercase">
+                            获取验证码 / GET CODE
+                        </button>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-8 bg-black text-white font-black text-3xl uppercase tracking-tighter hover:bg-white hover:text-black border-4 border-black transition-all active:translate-y-1">
+                        立即登录 / SIGN IN
+                    </button>
+</div>
+<div class="border-4 border-black p-4 flex gap-4 bg-gray-50">
+<div class="flex items-start pt-1">
+<input class="h-8 w-8 border-4 border-black text-black focus:ring-0 rounded-none cursor-pointer" id="policy" type="checkbox"/>
+</div>
+<label class="text-sm font-bold leading-tight cursor-pointer uppercase" for="policy">
+                        我已阅读并同意 <a class="underline decoration-4" href="#">《用户服务协议》</a> 和 <a class="underline decoration-4" href="#">《隐私权政策》</a>。未注册手机号验证后将自动注册。
+                    </label>
+</div>
+</div>
+</div>
+<div class="p-6 border-t-4 border-black bg-black text-white text-center">
+<p class="font-black text-xs tracking-[0.2em] uppercase">NO FRILLS. ONLY FUNCTION.</p>
+</div>
+</div>
+</body></html>

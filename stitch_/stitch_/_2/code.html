@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                        "accent-blue": "#4e7a97",
+                        "active-blue": "#007AFF",
+                        "text-main": "#0e161b"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>校唠 - 全高校热榜</title>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }.post-title {
+            line-height: 1.2 !important;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-text-main dark:text-slate-100 flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<h2 class="text-text-main dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">全高校热榜</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-xl h-12 w-12 bg-transparent text-text-main dark:text-slate-100">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</button>
+</div>
+</div>
+<p class="text-accent-blue dark:text-slate-400 text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">每日更新1次</p>
+</header>
+<main class="flex flex-col gap-4 p-4">
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-sm bg-white dark:bg-slate-800 overflow-hidden border border-slate-100 dark:border-slate-700">
+<div class="relative w-full aspect-video bg-cover bg-center" data-alt="A giant fluffy cat in a university campus garden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARXFe-HU2AujGvmtk9FmaEhCoP8d-EahTIRvwp7xlgJJyBYz50gzwS6fj70DJizB-dlJYsIokNColKQ2_f2mfuBW9w2eHlFaxbYJNOoBsd-p7M6Ot1cDz4vqZXChlEGpm8opLg2SaA_ypykCgk0UuonM72K2cKi3p8EdKAIqQ66MFvBjiJdc0vHtHAY8jiIMQ3Zk1kfzW_nIwUX1MHcXzoAyDzEL7rIAtRMl2XEbMZZh7S3Sr8n64j3OYFQ0i-mopleS7e0aH3aWY");'>
+<div class="absolute top-4 left-4 bg-[#FFC107] text-white px-3 py-1 rounded-full font-bold shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">workspace_premium</span>
+                        NO.1
+                    </div>
+</div>
+<div class="flex flex-col gap-1.5 p-4">
+<div class="flex items-center gap-2">
+<span class="text-yellow-500 font-bold">清华大学</span>
+<span class="text-accent-blue text-[10px] bg-primary/40 px-2 py-0.5 rounded-full">今日全网最热</span>
+</div>
+<p class="text-accent-blue/70 text-xs font-normal">热度 99.8k</p>
+<h3 class="text-text-main dark:text-slate-100 text-lg font-bold post-title">1. 某高校惊现超大流浪猫，全校围观</h3>
+<div class="flex items-center gap-4 mt-1">
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl">nutrition</span>
+<span class="text-sm font-bold">12.5k</span>
+</div>
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl font-variation-settings-fill">sports_basketball</span>
+<span class="text-sm font-bold">842</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-sm bg-white dark:bg-slate-800 overflow-hidden border border-slate-100 dark:border-slate-700">
+<div class="relative w-full aspect-video bg-cover bg-center" data-alt="Lively university library with students studying" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvjVSTf_UJbIh-b4mP_Egj9pvXWPhWA6cUnnub2nxlfo_0St73zH5G586hE0tnsqx46qePxgWRaNaoEbxy5NR00F6xN2bZf7E3iFRtckJ36god4-Oioq4Xqa1IBTaUq6bR-I7Ga_K8Q6LPjF82WrP-QnyEzo3IWnKCvL_hM6k24Aoc6bmYSodaW_yLmv5NCZIUH4rxan1ub-WbgZ7bVAju7wdfXgQb0TliOBOTK0lm3lCT9AZN5tg2KUbCio5F5zxhhh3eYBAQNrs");'>
+<div class="absolute top-4 left-4 bg-slate-300 text-slate-700 px-3 py-1 rounded-full font-bold shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">star</span>
+                        NO.2
+                    </div>
+</div>
+<div class="flex flex-col gap-1.5 p-4">
+<div class="flex items-center gap-2">
+<span class="text-blue-400 font-bold">北京大学</span>
+</div>
+<p class="text-accent-blue/70 text-xs font-normal">热度 85.2k</p>
+<h3 class="text-text-main dark:text-slate-100 text-lg font-bold post-title">2. 图书馆凌晨4点的样子，这就是传说中的内卷吗？</h3>
+<div class="flex items-center gap-4 mt-1">
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl">nutrition</span>
+<span class="text-sm font-bold">8.9k</span>
+</div>
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl font-variation-settings-fill">sports_basketball</span>
+<span class="text-sm font-bold">1.2k</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-sm bg-white dark:bg-slate-800 overflow-hidden border border-slate-100 dark:border-slate-700">
+<div class="relative w-full aspect-video bg-cover bg-center" data-alt="University cafeteria with delicious local food" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1lpGb1mu05QOLXPIhIn-GDMkc73P91SOBiK-0Kg0ESAYjxS2NTV3kwIMuhMrI4olBjdMVvAC20IB8OYTilG0DTiNy-YD4bG0wsl8T_vpSBxJGmf0fujIzoXfuF_Uze8ZF47l2mZ8WdBQvxegpIa6ZxMXNkauj5usW4q31xd_o4Z6HGKIHycsIB2I0Q88Lzlcw-nCzXgxBGEMpvcd2qRQ5RSLRad6aCkwrmR3KHJke3ls9W_-SHppPkYlGxzhfeWxkIW-lL6a9_jM");'>
+<div class="absolute top-4 left-4 bg-orange-400 text-white px-3 py-1 rounded-full font-bold shadow-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">shield</span>
+                        NO.3
+                    </div>
+</div>
+<div class="flex flex-col gap-1.5 p-4">
+<div class="flex items-center gap-2">
+<span class="text-green-500 font-bold">复旦大学</span>
+</div>
+<p class="text-accent-blue/70 text-xs font-normal">热度 72.4k</p>
+<h3 class="text-text-main dark:text-slate-100 text-lg font-bold post-title">3. 二食堂的新出的酱香饼，味道绝了！</h3>
+<div class="flex items-center gap-4 mt-1">
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl">nutrition</span>
+<span class="text-sm font-bold">5.6k</span>
+</div>
+<div class="flex items-center gap-1.5 text-accent-blue">
+<span class="material-symbols-outlined text-xl font-variation-settings-fill">sports_basketball</span>
+<span class="text-sm font-bold">345</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="text-indigo-400 text-xs font-bold">中山大学</span>
+</div>
+<p class="text-accent-blue/70 text-[10px] font-normal">热度 45.1k</p>
+<h3 class="text-text-main dark:text-slate-100 font-bold post-title text-base">4. 谁在操场丢了一把蓝色的伞？</h3>
+<div class="flex items-center gap-4 mt-1">
+<div class="flex items-center gap-1 text-accent-blue">
+<span class="material-symbols-outlined text-lg">nutrition</span>
+<span class="text-xs font-bold">2.1k</span>
+</div>
+<div class="flex items-center gap-1 text-accent-blue">
+<span class="material-symbols-outlined text-lg font-variation-settings-fill">sports_basketball</span>
+<span class="text-xs font-bold">120</span>
+</div>
+</div>
+</div>
+<div class="w-24 h-24 rounded-lg bg-cover bg-center shrink-0" data-alt="A lonely blue umbrella on a rainy track field" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8jj3Su41HetNFMlp2t9GzMP1pznoFcF-dRtVQ7wtyGJzcH50GoRHg2zLq5aihw0KbF6pPte75-MrVrNlmm9r-1FMlBEBpHZCwWIZUobQLU-S7PT5qr1gDR-YhOAHeEQ22zCLZAH-Po7-94xZBnAbppmEia_1GmZI2bKe9VI0D9husQXsblnybzjMRmTUiqr82OxZulLucHRf6ose0gXyK099qvX52_yaDh5YyNLXbLZhA25N7eZo__NlICiEQM8Q2FSRhKATiRWI");'></div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 bg-[#f8f9fa] dark:bg-background-dark px-4 pb-safe pt-2 z-50">
+<div class="flex items-end justify-around max-w-lg mx-auto h-12">
+<a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">home</span>
+<p class="text-[10px] font-medium leading-none">校园墙</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-active-blue" href="#">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1">local_fire_department</span>
+<p class="text-[10px] font-medium leading-none">热榜</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">add_circle</span>
+<p class="text-[10px] font-medium leading-none">发帖</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">chat_bubble</span>
+<p class="text-[10px] font-medium leading-none">消息</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-0.5 text-slate-400" href="#">
+<span class="material-symbols-outlined text-[26px]">person</span>
+<p class="text-[10px] font-medium leading-none">我的</p>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

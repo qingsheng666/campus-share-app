@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", // Updated to a standard blue for active state
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }.active-tab-indicator {
+            position: relative;
+        }
+        .active-tab-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background-color: currentColor;
+            border-radius: 2px;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl">
+<div class="flex items-center bg-white dark:bg-slate-900 px-4 pt-6 pb-2 justify-between sticky top-0 z-10">
+<h2 class="text-slate-900 dark:text-slate-100 text-2xl font-bold leading-tight tracking-tight">消息通知</h2>
+</div>
+<div class="bg-white dark:bg-slate-900 sticky top-[68px] z-10">
+<div class="flex border-b border-slate-100 dark:border-slate-800 px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-slate-900 dark:border-primary text-slate-900 dark:text-primary pb-3 pt-4" href="#">
+<p class="text-sm font-bold leading-normal">互动提醒</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-400 dark:text-slate-500 pb-3 pt-4" href="#">
+<p class="text-sm font-bold leading-normal">系统通知</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-400 dark:text-slate-500 pb-3 pt-4" href="#">
+<p class="text-sm font-bold leading-normal">反馈回复</p>
+</a>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto bg-background-light/50 dark:bg-background-dark/50">
+<div class="flex gap-4 bg-white dark:bg-slate-900 px-4 py-4 border-b border-slate-50 dark:border-slate-800/50">
+<div class="relative shrink-0">
+<div class="bg-blue-100 dark:bg-blue-900/30 rounded-full h-12 w-12 flex items-center justify-center overflow-hidden">
+<img alt="User avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjHqRZlxHGChLoIlwiPiffb88oNPoXj8hZPV0ewtMj-fttGtV8FSZmwm3FFYfwB0bx49j5pnMIgFretPut_E2qcFhBn-TYttCz7fGEbSC2nGseJlOczfT10ru1RFlkW3i5XS-g648C9ZgHmS6qB9S1uTZ8oyJrTcporFdvW4Yi41DZVMPzWboil77igIFdtQlPu6Uim23jAh1suKDGmkElQUttbWjYQkO3kybm-EpC9uDOKenqH40shqHC7WG9Xs_rD3HbOsm3oLk"/>
+</div>
+<div class="absolute -right-1 -bottom-1 bg-pink-500 rounded-full p-0.5 border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-[10px] text-white material-symbols-fill">favorite</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">小花生 给你的帖子点赞啦</p>
+<span class="text-slate-400 text-[11px]">刚刚</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1 bg-slate-50 dark:bg-slate-800/50 p-2 rounded line-clamp-1 border-l-2 border-blue-400">
+                        赞了你的帖子：今天学校食堂的红烧肉真好吃
+                    </p>
+</div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-slate-900 px-4 py-4 border-b border-slate-50 dark:border-slate-800/50">
+<div class="relative shrink-0">
+<div class="bg-blue-100 dark:bg-blue-900/30 rounded-full h-12 w-12 flex items-center justify-center overflow-hidden">
+<img alt="User avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiwT2uF5NIRt7__9vv0ir4tO2LrR_j7UGGyBJX88Qrocxg8Xc9OyvGmgdGn6hYDZDQqbyKfDGrJk6tH49hwGdfBrYaUp252-XQU_ur2PJjkJFqgckJ5Tw3hw7BvIYNmXvtDsHNfJRH3HcpCfNk124XaY5yQ4XnPOaXNzp8WyPBMCVw-amLa98P0jNBkl8pmHFe29hXSv5aOh04Irn8jMCPCrDdjGaGFQV-xZuLQX5z4U6QcD0eKdUPqHAjd-jmPwimOSrQETGiYZ4"/>
+</div>
+<div class="absolute -right-1 -bottom-1 bg-blue-500 rounded-full p-0.5 border-2 border-white dark:border-slate-900">
+<span class="material-symbols-outlined text-[10px] text-white">chat_bubble</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">张三 回复了你的评论</p>
+<span class="text-slate-400 text-[11px]">2分钟前</span>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1 mb-2">我也觉得，下次一起去吃！🥘</p>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-2 rounded text-[11px] text-slate-400 border-l-2 border-slate-200 dark:border-slate-700">
+                        原贴：关于图书馆闭馆时间的建议
+                    </div>
+</div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-slate-900 px-4 py-4 border-b border-slate-50 dark:border-slate-800/50">
+<div class="relative shrink-0">
+<div class="bg-yellow-100 dark:bg-yellow-900/30 rounded-full h-12 w-12 flex items-center justify-center overflow-hidden">
+<img alt="System icon" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQWebFMMqylNSjcYH9GdAZuA9eJzAzp5ZTGB2pkuXlIkzycpqlSLSzmLFOhAMVz6j6I2W1xG4GwWeAlLYwDJjub3yb6SstqO-AquHsKPxAWgyzCuF1x5d5WV7scwrZB0dh1f0M5XSttn2nA8XPHTR3PoX5UN6HKEjNMPoZ-5YjYJKydVTkx0Qii2KHx9GGsIm1938CldJh3lxjQUHoXRjICkTemqAkflKxfN28t-K0YMu-SpurclBgSDVT5LBgwOblMvXOdWAyMHk"/>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">校唠小助手</p>
+<span class="text-slate-400 text-[11px]">1小时前</span>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">🎉 恭喜！你发的帖子上榜啦！快去看看大家都在讨论什么吧~</p>
+</div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-slate-900 px-4 py-4 border-b border-slate-50 dark:border-slate-800/50">
+<div class="shrink-0">
+<div class="bg-slate-100 dark:bg-slate-800 rounded-full h-12 w-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">gavel</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">反馈回复</p>
+<span class="text-slate-400 text-[11px]">昨天</span>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1 line-clamp-2">您举报的“发广告的行为”已核实，该内容已被下架。感谢您对校园社区环境的维护！</p>
+</div>
+</div>
+<div class="flex gap-4 bg-white dark:bg-slate-900 px-4 py-4 border-b border-slate-50 dark:border-slate-800/50">
+<div class="shrink-0">
+<div class="bg-red-50 dark:bg-red-900/20 rounded-full h-12 w-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-400">report</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex justify-between items-start">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold">系统下架通知</p>
+<span class="text-slate-400 text-[11px]">昨天</span>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">很抱歉，您的发帖《出二手教材》因内容违规（包含外部链接）已被下架。</p>
+</div>
+</div>
+<div class="h-24 bg-transparent"></div>
+</div>
+<div class="absolute bottom-0 w-full border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 px-2 pb-6 pt-2">
+<div class="flex items-center justify-around">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">grid_view</span>
+<p class="text-[11px] font-medium">校园墙</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">local_fire_department</span>
+<p class="text-[11px] font-medium">热榜</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">add_box</span>
+<p class="text-[11px] font-medium">发帖</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined material-symbols-fill text-[24px] active-tab-indicator">chat_bubble</span>
+<p class="text-[11px] font-bold">消息</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<p class="text-[11px] font-medium">我的</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>

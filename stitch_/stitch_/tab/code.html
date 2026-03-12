@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e3f2fc",
+                        "macaron-pink": "#ffebf2",
+                        "macaron-blue": "#e0f2ff",
+                        "macaron-yellow": "#fff9db",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111b21",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "20px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-shadow {
+            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden">
+<header class="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-primary/30">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-macaron-pink rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-pink-400">auto_awesome</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-pink-400 bg-clip-text text-transparent">校唠</h1>
+</div>
+<div class="flex gap-3">
+<button class="p-2 bg-macaron-blue rounded-full text-blue-500">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 bg-macaron-yellow rounded-full text-yellow-600">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<div class="flex px-4 py-3 gap-4 overflow-x-auto no-scrollbar justify-center">
+<button class="px-5 py-2 rounded-2xl bg-primary text-blue-600 font-bold text-sm whitespace-nowrap">推荐</button>
+<button class="px-5 py-2 rounded-2xl bg-macaron-pink/50 text-pink-500 font-bold text-sm whitespace-nowrap">最新</button>
+</div>
+<main class="flex-1 px-4 pb-32 space-y-4">
+<div class="bg-white dark:bg-slate-800 rounded-2xl custom-shadow overflow-hidden border border-primary/20">
+<div class="p-4">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-macaron-blue flex items-center justify-center overflow-hidden">
+<img alt="Cartoon boy avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoyaPwc_Y8XYJoyd93iIJvhLvKvh9b1CIRxXWb_Fi-hOzizWjHm8AJxQkPCNVTe9fOmMo02dAu1hVt8yoq6ErFZ_m4MskvETMja5hpGVeGkHi_qeHGW7SmQ9JODxwI3aHLhuXVcYvccjXvdy6GWIYSkocuUrsqeQMeFAVE5w3F5xFoE5B_uCY0AReCrk18TebeRY7OXhbaeZlSRFCX-5UTNWTEs7iDJhD0V45uFsI0t4KqVagYyflt9N9AWh9ZaL0afJcaeYd-NoY"/>
+</div>
+<div>
+<p class="font-bold text-sm">@大耳狗学长</p>
+<p class="text-xs text-slate-400">5分钟前 · 华南理工大学</p>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                        今天在图书馆二楼捡到一个哆啦A梦的挂件，是谁掉的呀？我在前台放着啦，快去认领吧！✨
+                    </p>
+<div class="rounded-xl overflow-hidden mb-4 h-48 bg-slate-100">
+<img alt="Cute blue plush toy keychain" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfuRiqDUkvK8TfWdeU1i4rKqsyJ7k4kNf1N_5SFB2mzwKn704GGO3xLt6BJ7mf1_uINexhg_3K4BgflCL2X4_ZqU9Km4rcSjHWkMh2xkYqLc1XW9xmG_sUcLciNWK3osxfiOnyF7q6ohCep-Jrws4gwZ46xoYnv6ONK478eLzlr3k05bTh7GElUqGVyCT4GRMkZQtER4lmCOJEus8ac-INCz80QHuZNnTt2MHotT10XLKW6D4aOIYdv6Z6oITIyd5fLG7EKOB8sDc"/>
+</div>
+<div class="flex justify-end gap-4 items-center pt-2">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-macaron-pink/30 rounded-full text-pink-500">
+<span class="material-symbols-outlined text-lg">favorite</span>
+<span class="text-xs font-bold">520</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-macaron-blue/30 rounded-full text-blue-500">
+<span class="material-symbols-outlined text-lg">sports_basketball</span>
+<span class="text-xs font-bold">12</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-2xl custom-shadow overflow-hidden border border-primary/20">
+<div class="p-4">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-macaron-yellow flex items-center justify-center overflow-hidden">
+<img alt="Cartoon girl avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8IDJi5vmOGwd9oUnz9hGpeWqq1OdXh2yNdZ4652Yme4zY8QWraAIt1GvMjLmFV_ai-2vRlVWY8ysN469cuwx7NNxhJ9oNZo8kCttSldRXhCGBrD5pCmLjSziifU5b-hn0cFbSf3qN55Kax42Zi8lRrNSH_OmkHx9TVVOqOYydzgHgqntS1TlddoZjme58EMgxc8wNltNdkwirl0KCE_CRVBjKejCpi6oAhjM5Gx5GGwksGPIpRXFXnoQbj1diVDLCuHlT-E3y8Dk"/>
+</div>
+<div>
+<p class="font-bold text-sm">@美少女战士</p>
+<p class="text-xs text-slate-400">15分钟前 · 华南理工大学</p>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                        西苑二食堂的那个糖醋里脊真的绝了！今天又是被美食治愈的一天，有没有uu一起拼单奶茶的？🧋
+                    </p>
+<div class="flex justify-end gap-4 items-center pt-2">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-macaron-pink/30 rounded-full text-pink-500">
+<span class="material-symbols-outlined text-lg">favorite</span>
+<span class="text-xs font-bold">1.2k</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-macaron-blue/30 rounded-full text-blue-500">
+<span class="material-symbols-outlined text-lg">sports_basketball</span>
+<span class="text-xs font-bold">88</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-primary/30 px-2 pb-6 pt-3 flex items-center justify-between z-30">
+<a class="flex flex-1 flex-col items-center gap-1 text-blue-500" href="#">
+<div class="w-10 h-10 rounded-xl bg-macaron-blue flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] fill-1">menu_book</span>
+</div>
+<span class="text-[10px] font-bold">校园墙</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">leaderboard</span>
+</div>
+<span class="text-[10px] font-medium">热榜</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</div>
+<span class="text-[10px] font-medium">发帖</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">mail</span>
+</div>
+<span class="text-[10px] font-medium">消息</span>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+</div>
+<span class="text-[10px] font-medium">我的</span>
+</a>
+</nav>
+</div>
+
+</body></html>
