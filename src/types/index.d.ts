@@ -29,33 +29,46 @@ declare global {
     avatar: string
     gender?: number
     school?: string
+    school_id?: string
     major?: string
     grade?: string
+    member_expire_time?: Date | string
     createTime?: Date
     updateTime?: Date
   }
 
   /**
-   * 帖子信息
+   * 帖子信息（数据库字段）
+   */
+  interface PostDB {
+    _id?: string
+    user_id: string
+    school_id: string
+    content: string
+    images?: string[]
+    like_count?: number
+    comment_count?: number
+    create_time?: Date
+    update_time?: Date
+    status?: number // 0=审核通过 1=违规下架
+  }
+
+  /**
+   * 帖子信息（前端展示）
    */
   interface Post {
     _id?: string
-    userId: string
-    school: string
-    category: string
-    title: string
+    user_id: string
+    school_id: string
     content: string
     images?: string[]
-    isAnonymous?: boolean
-    viewCount?: number
-    likeCount?: number
-    commentCount?: number
-    createTime?: Date
-    updateTime?: Date
+    like_count?: number
+    comment_count?: number
+    create_time?: Date
     // 扩展字段（用于展示）
     nickname?: string
     avatar?: string
-    isLiked?: boolean
+    is_liked?: boolean
     time?: string
   }
 
@@ -72,6 +85,33 @@ declare global {
     nickname?: string
     avatar?: string
     time?: string
+  }
+
+  /**
+   * 云函数通用返回
+   */
+  interface CloudResponse<T = any> {
+    code: number
+    message: string
+    data?: T
+    error?: string
+  }
+
+  /**
+   * 获取帖子列表返回
+   */
+  interface GetPostsResponse {
+    list: Post[]
+    hasMore: boolean
+    lastCreateTime?: Date
+  }
+
+  /**
+   * 点赞返回
+   */
+  interface LikeResponse {
+    is_liked: boolean
+    like_count: number
   }
 }
 

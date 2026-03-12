@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 interface UserInfo {
   _id?: string
@@ -7,14 +7,36 @@ interface UserInfo {
   avatar: string
   gender?: number
   school?: string
+  school_id?: string
   major?: string
   grade?: string
+  member_expire_time?: Date | string
 }
 
 export const useUserStore = defineStore('user', () => {
   const token = ref<string>('')
   const userInfo = ref<UserInfo | null>(null)
   const isLoggedIn = ref<boolean>(false)
+
+  /**
+   * 检查是否是会员
+   */
+  const isMember = computed(() => {
+    if (!userInfo.value?.member_expire_time) return false
+    try {
+      const expireTime = new Date(userInfo.value.member_expire_time)
+      return expireTime > new Date()
+    } catch {
+      return false
+    }
+  })
+
+  /**
+   * 获取 school_id
+   */
+  const schoolId = computed(() => {
+    return userInfo.value?.school_id || ''
+  })
 
   /**
    * 检查登录状态
@@ -72,6 +94,8 @@ export const useUserStore = defineStore('user', () => {
     token,
     userInfo,
     isLoggedIn,
+    isMember,
+    schoolId,
     checkLoginStatus,
     setLoginInfo,
     logout,

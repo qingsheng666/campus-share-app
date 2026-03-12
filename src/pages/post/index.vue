@@ -1,61 +1,29 @@
 <template>
   <view class="post-container">
-    <!-- 选择分类 -->
-    <view class="section">
-      <view class="section-title">选择分类</view>
-      <view class="category-list">
-        <view
-          v-for="(cat, index) in categories"
-          :key="index"
-          class="category-item"
-          :class="{ active: currentCategory === index }"
-          @click="currentCategory = index"
-        >
-          <text class="cat-icon">{{ cat.icon }}</text>
-          <text>{{ cat.name }}</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- 输入标题 -->
-    <view class="section">
-      <view class="section-title">标题</view>
-      <u-input
-        v-model="formData.title"
-        placeholder="请输入标题（30字以内）"
-        maxlength="30"
-        :border="false"
-        customStyle="font-size: 32rpx"
-      />
-      <view class="char-count">{{ formData.title.length }}/30</view>
-    </view>
-
-    <!-- 输入内容 -->
-    <view class="section">
-      <view class="section-title">内容</view>
+    <!-- 内容输入区 -->
+    <view class="content-section">
       <u-textarea
         v-model="formData.content"
         placeholder="分享你的想法..."
-        maxlength="500"
+        maxlength="1000"
         :autoHeight="true"
         :border="false"
-        customStyle="font-size: 28rpx"
+        :showWordLimit="true"
+        customStyle="font-size: 32rpx; min-height: 300rpx;"
       />
-      <view class="char-count">{{ formData.content.length }}/500</view>
     </view>
 
     <!-- 添加图片 -->
-    <view class="section">
-      <view class="section-title">图片</view>
+    <view class="images-section">
       <view class="image-list">
         <view
           v-for="(img, index) in formData.images"
           :key="index"
           class="image-item"
         >
-          <image :src="img" class="image-preview"></image>
+          <image :src="img" class="image-preview" mode="aspectFill" @click="previewImage(index)"></image>
           <view class="image-delete" @click="deleteImage(index)">
-            <u-icon name="close" size="14" color="#fff"></u-icon>
+            <u-icon name="close" size="16" color="#fff"></u-icon>
           </view>
         </view>
         <view
@@ -63,28 +31,23 @@
           class="image-add"
           @click="chooseImage"
         >
-          <u-icon name="camera" size="32" color="#ccc"></u-icon>
-          <text>添加图片</text>
+          <u-icon name="camera" size="36" color="#ccc"></u-icon>
+          <text class="add-text">{{ formData.images.length }}/9</text>
         </view>
       </view>
     </view>
 
     <!-- 学校信息 -->
-    <view class="section">
-      <view class="section-title">发布到</view>
-      <view class="school-info">
-        <u-icon name="home" size="18" color="#2979FF"></u-icon>
-        <text>{{ userStore.userInfo?.school || '请先选择学校' }}</text>
+    <view class="info-section">
+      <view class="info-item">
+        <u-icon name="home" size="20" color="#2979FF"></u-icon>
+        <text class="info-text">{{ userStore.userInfo?.school || '请先选择学校' }}</text>
       </view>
     </view>
 
-    <!-- 匿名选项 -->
-    <view class="section">
-      <view class="section-title">其他设置</view>
-      <view class="setting-item">
-        <text>匿名发布</text>
-        <u-switch v-model="formData.anonymous" activeColor="#2979FF"></u-switch>
-      </view>
+    <!-- 提示信息 -->
+    <view class="tips-section">
+      <text class="tips-text">请遵守社区规范，发布健康向上的内容</text>
     </view>
 
     <!-- 底部按钮 -->
@@ -96,51 +59,92 @@
         :loading="loading"
         :disabled="!canPost"
         @click="handlePost"
-      />
+      >
+        <template #default>
+          <text v-if="!loading">发布</text>
+          <text v-else>审核中...</text>
+        </template>
+      </u-button>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useUserStore } from '@/store/user'
+import { postApi } from '@/api'
 
 const userStore = useUserStore()
 
-const currentCategory = ref(0)
-const categories = [
-  { name: '全部', icon: '📝' },
-  { name: '表白墙', icon: '💕' },
-  { name: '树洞', icon: '🌲' },
-  { name: '互助', icon: '🤝' },
-  { name: '二手', icon: '📦' },
-  { name: '租房', icon: '🏠' },
-  { name: '求职', icon: '💼' }
-]
-
 const formData = ref({
-  title: '',
   content: '',
-  images: [] as string[],
-  anonymous: false
+  images: [] as string[]
 })
 
 const loading = ref(false)
 
+// 检查是否可以发布
 const canPost = computed(() => {
-  return formData.value.title.trim().length > 0 &&
-    formData.value.content.trim().length > 0 &&
-    userStore.isLoggedIn
+  return formData.value.content.trim().length > 0 &&
+    formData.value.content.length <= 1000 &&
+    userStore.isLoggedIn &&
+    userStore.isMember &&
+    !loading.value
+})
+
+// 检查会员状态
+onMounted(() => {
+  userStore.checkLoginStatus()
+
+  if (!userStore.isLoggedIn) {
+    uni.showModal({
+      title: '提示',
+      content: '请先登录',
+      showCancel: false,
+      success: () => {
+        uni.navigateBack()
+      }
+    })
+    return
+  }
+
+  if (!userStore.isMember) {
+    uni.showModal({
+      title: '提示',
+      content: '请先开通会员',
+      showCancel: false,
+      success: () => {
+        uni.navigateBack()
+      }
+    })
+  }
 })
 
 // 选择图片
 const chooseImage = () => {
+  const remainCount = 9 - formData.value.images.length
+
   uni.chooseImage({
-    count: 9 - formData.value.images.length,
+    count: remainCount,
     sizeType: ['compressed'],
     sourceType: ['album', 'camera'],
     success: (res) => {
-      formData.value.images.push(...res.tempFilePaths)
+      // 检查图片大小，超过2M的提示
+      const tempFiles = res.tempFiles || []
+      const validFiles: string[] = []
+
+      for (const file of tempFiles) {
+        if (file.size && file.size > 2 * 1024 * 1024) {
+          uni.showToast({
+            title: '图片不能超过2M',
+            icon: 'none'
+          })
+        } else {
+          validFiles.push(file.path)
+        }
+      }
+
+      formData.value.images.push(...validFiles)
     }
   })
 }
@@ -150,43 +154,75 @@ const deleteImage = (index: number) => {
   formData.value.images.splice(index, 1)
 }
 
+// 预览图片
+const previewImage = (index: number) => {
+  uni.previewImage({
+    urls: formData.value.images,
+    current: index
+  })
+}
+
 // 发布
 const handlePost = async () => {
-  if (!canPost.value) return
-
-  if (!userStore.isLoggedIn) {
-    uni.navigateTo({
-      url: '/pages/login/index'
-    })
+  if (!canPost.value) {
+    if (!userStore.isMember) {
+      uni.showToast({
+        title: '请先开通会员',
+        icon: 'none'
+      })
+    }
     return
   }
 
   loading.value = true
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    // 这里先上传图片到云存储，然后调用云函数
+    // 为简化演示，我们直接调用云函数（图片上传逻辑需要根据实际云存储实现）
 
-    uni.showToast({
-      title: '发布成功',
-      icon: 'success'
+    const res = await postApi.createPost({
+      content: formData.value.content,
+      images: formData.value.images,
+      user_id: userStore.userInfo?._id
     })
 
-    formData.value = {
-      title: '',
-      content: '',
-      images: [],
-      anonymous: false
+    if (res.code === 0) {
+      uni.showToast({
+        title: '发布成功',
+        icon: 'success'
+      })
+
+      // 清空表单
+      formData.value = {
+        content: '',
+        images: []
+      }
+
+      // 返回首页并刷新
+      setTimeout(() => {
+        uni.navigateBack()
+      }, 1000)
+    } else {
+      uni.showToast({
+        title: res.message || '发布失败',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  } catch (error: any) {
+    console.error('发布失败:', error)
+
+    let errMsg = '发布失败，请重试'
+    if (error.message && error.message.includes('违规')) {
+      errMsg = '内容包含违规信息，请修改后再发布'
+    } else if (error.message && error.message.includes('会员')) {
+      errMsg = '请先开通会员'
     }
 
-    setTimeout(() => {
-      uni.switchTab({
-        url: '/pages/index/index'
-      })
-    }, 1000)
-  } catch (error) {
     uni.showToast({
-      title: '发布失败，请重试',
-      icon: 'none'
+      title: errMsg,
+      icon: 'none',
+      duration: 2500
     })
   } finally {
     loading.value = false
@@ -201,117 +237,96 @@ const handlePost = async () => {
   padding-bottom: 200rpx;
 }
 
-.section {
+.content-section {
   background: #fff;
-  margin-bottom: 24rpx;
   padding: 32rpx;
-
-  .section-title {
-    font-size: 28rpx;
-    color: #333;
-    font-weight: 500;
-    margin-bottom: 24rpx;
-  }
+  margin-bottom: 16rpx;
 }
 
-.category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20rpx;
+.images-section {
+  background: #fff;
+  padding: 32rpx;
+  margin-bottom: 16rpx;
 
-  .category-item {
+  .image-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8rpx;
-    width: 120rpx;
-    padding: 20rpx 0;
-    background: #f8f9fa;
-    border-radius: 16rpx;
-    font-size: 24rpx;
-    color: #666;
+    flex-wrap: wrap;
+    gap: 16rpx;
 
-    .cat-icon {
-      font-size: 36rpx;
+    .image-item {
+      position: relative;
+      width: 200rpx;
+      height: 200rpx;
+
+      .image-preview {
+        width: 100%;
+        height: 100%;
+        border-radius: 16rpx;
+      }
+
+      .image-delete {
+        position: absolute;
+        top: -12rpx;
+        right: -12rpx;
+        width: 44rpx;
+        height: 44rpx;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
-    &.active {
-      background: #E3F2FD;
-      color: #2979FF;
-    }
-  }
-}
-
-.char-count {
-  text-align: right;
-  font-size: 24rpx;
-  color: #ccc;
-  margin-top: 8rpx;
-}
-
-.image-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16rpx;
-
-  .image-item {
-    position: relative;
-    width: 200rpx;
-    height: 200rpx;
-
-    .image-preview {
-      width: 100%;
-      height: 100%;
-      border-radius: 12rpx;
-      object-fit: cover;
-    }
-
-    .image-delete {
-      position: absolute;
-      top: -12rpx;
-      right: -12rpx;
-      width: 40rpx;
-      height: 40rpx;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.6);
+    .image-add {
+      width: 200rpx;
+      height: 200rpx;
+      border: 2rpx dashed #ddd;
+      border-radius: 16rpx;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 8rpx;
+      color: #ccc;
+
+      .add-text {
+        font-size: 24rpx;
+        color: #999;
+      }
     }
   }
+}
 
-  .image-add {
-    width: 200rpx;
-    height: 200rpx;
-    border: 2rpx dashed #ddd;
-    border-radius: 12rpx;
+.info-section {
+  background: #fff;
+  padding: 32rpx;
+  margin-bottom: 16rpx;
+
+  .info-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 12rpx;
-    color: #ccc;
-    font-size: 24rpx;
+    font-size: 28rpx;
+    color: #666;
+    background: #f8f9fa;
+    padding: 24rpx;
+    border-radius: 16rpx;
+
+    .info-text {
+      color: #333;
+    }
   }
 }
 
-.school-info {
-  display: flex;
-  align-items: center;
-  gap: 12rpx;
-  font-size: 28rpx;
-  color: #666;
-  background: #f8f9fa;
-  padding: 24rpx;
-  border-radius: 12rpx;
-}
+.tips-section {
+  padding: 0 32rpx;
+  margin-top: 24rpx;
 
-.setting-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 28rpx;
-  color: #666;
+  .tips-text {
+    font-size: 24rpx;
+    color: #999;
+  }
 }
 
 .footer {
@@ -327,6 +342,7 @@ const handlePost = async () => {
   :deep(.u-button) {
     border-radius: 48rpx;
     height: 88rpx;
+    font-size: 32rpx;
   }
 }
 </style>
