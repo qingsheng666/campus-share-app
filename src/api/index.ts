@@ -16,11 +16,51 @@ async function callCloudFunction<T = any>(name: string, data: any = {}): Promise
 }
 
 /**
+ * 用户认证相关API（云函数版）
+ */
+export const authApi = {
+  /**
+   * 发送短信验证码
+   */
+  async sendSms(phone: string): Promise<CloudResponse<{ verify_code?: string }>> {
+    return await callCloudFunction('sendSms', { phone })
+  },
+
+  /**
+   * 验证码登录
+   */
+  async login(params: LoginParams): Promise<CloudResponse<LoginData>> {
+    return await callCloudFunction('login', params)
+  },
+
+  /**
+   * 注册/更新用户信息
+   */
+  async registerUser(params: RegisterParams): Promise<CloudResponse<User>> {
+    return await callCloudFunction('registerUser', params)
+  },
+
+  /**
+   * 获取用户信息
+   */
+  async getUserInfo(params?: { user_id?: string; openid?: string }): Promise<CloudResponse<User>> {
+    return await callCloudFunction('getUserInfo', params || {})
+  },
+
+  /**
+   * 注销账号
+   */
+  async deleteAccount(params: DeleteAccountParams): Promise<CloudResponse<any>> {
+    return await callCloudFunction('deleteAccount', params)
+  }
+}
+
+/**
  * 用户相关API
  */
 export const userApi = {
   /**
-   * 获取用户信息
+   * 获取用户信息（本地数据库，兼容用）
    */
   async getUserInfo(userId: string) {
     const res = await db.collection('users').doc(userId).get()
@@ -28,7 +68,7 @@ export const userApi = {
   },
 
   /**
-   * 更新用户信息
+   * 更新用户信息（本地数据库，兼容用）
    */
   async updateUserInfo(userId: string, data: any) {
     const res = await db.collection('users').doc(userId).update({

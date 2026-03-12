@@ -38,32 +38,19 @@
               type="primary"
               size="small"
               :disabled="countdown > 0 || !phoneValid"
+              :loading="sendingCode"
               @click="sendCode"
             />
           </template>
         </u-input>
       </view>
 
-      <view class="form-item">
-        <u-input
-          v-model="school"
-          placeholder="请选择/输入学校"
-          :clearable="true"
-          @click="showSchoolPicker = true"
-          readonly
-        >
-          <template #prefix>
-            <text class="prefix-icon">🏫</text>
-          </template>
-        </u-input>
-      </view>
-
       <view class="btn-area">
         <u-button
-          text="登录 / 注册"
+          text="登录"
           type="primary"
           size="large"
-          :loading="loading"
+          :loading="loggingIn"
           :disabled="!canLogin"
           @click="handleLogin"
         />
@@ -78,65 +65,50 @@
         >
           <text class="agreement-text">
             我已阅读并同意
-            <text class="link">《用户协议》</text>
+            <text class="link" @click.stop="viewAgreement('user')">《用户协议》</text>
             和
-            <text class="link">《隐私政策》</text>
+            <text class="link" @click.stop="viewAgreement('privacy')">《隐私政策》</text>
           </text>
         </u-checkbox>
       </view>
     </view>
-
-    <!-- 学校选择器 -->
-    <u-picker
-      :show="showSchoolPicker"
-      :columns="schoolColumns"
-      keyName="name"
-      @confirm="onSchoolConfirm"
-      @cancel="showSchoolPicker = false"
-    />
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useUserStore } from '@/store/user'
+import { authApi } from '@/api'
 
 const userStore = useUserStore()
 
 const phone = ref('')
 const code = ref('')
-const school = ref('')
 const agree = ref(false)
-const loading = ref(false)
+const loggingIn = ref(false)
+const sendingCode = ref(false)
 const countdown = ref(0)
-const showSchoolPicker = ref(false)
 
-// 模拟学校数据
-const schoolList = [
-  { name: '北京大学' },
-  { name: '清华大学' },
-  { name: '复旦大学' },
-  { name: '上海交通大学' },
-  { name: '浙江大学' },
-  { name: '南京大学' },
-  { name: '中山大学' },
-  { name: '华中科技大学' },
-  { name: '武汉大学' },
-  { name: '西安交通大学' }
-]
-
-const schoolColumns = ref([schoolList])
+// 检查本地登录态
+onMounted(() => {
+  userStore.checkLoginStatus()
+  if (userStore.isLoggedIn) {
+    uni.switchTab({
+      url: '/pages/index/index'
+    })
+  }
+})
 
 const phoneValid = computed(() => {
   return /^1[3-9]\d{9}$/.test(phone.value)
 })
 
 const canLogin = computed(() => {
-  return phoneValid.value && code.value.length === 6 && school.value && agree.value
+  return phoneValid.value && code.value.length === 6 && agree.value
 })
 
 // 发送验证码
-const sendCode = () => {
+const sendCode = async () => {
   if (!phoneValid.value) {
     uni.showToast({
       title: '请输入正确的手机号',
@@ -145,61 +117,128 @@ const sendCode = () => {
     return
   }
 
-  uni.showToast({
-    title: '验证码已发送',
-    icon: 'success'
-  })
+  sendingCode.value = true
 
-  countdown.value = 60
-  const timer = setInterval(() => {
-    countdown.value--
-    if (countdown.value <= 0) {
-      clearInterval(timer)
+  try {
+    const res = await authApi.sendSms(phone.value)
+
+    if (res.code === 0) {
+      // 生产环境不显示验证码，这里仅用于演示
+      if (res.data?.verify_code) {
+        uni.showToast({
+          title: `验证码: ${res.data.verify_code}`,
+          icon: 'none',
+          duration: 3000
+        })
+      } else {
+        uni.showToast({
+          title: '验证码已发送',
+          icon: 'success'
+        })
+      }
+
+      // 倒计时
+      countdown.value = 60
+      const timer = setInterval(() => {
+        countdown.value--
+        if (countdown.value <= 0) {
+          clearInterval(timer)
+        }
+      }, 1000)
+    } else {
+      uni.showToast({
+        title: res.message || '发送失败',
+        icon: 'none'
+      })
     }
-  }, 1000)
-}
-
-// 选择学校
-const onSchoolConfirm = (e: any) => {
-  school.value = e.value[0].name
-  showSchoolPicker.value = false
+  } catch (error) {
+    uni.showToast({
+      title: '发送失败，请重试',
+      icon: 'none'
+    })
+  } finally {
+    sendingCode.value = false
+  }
 }
 
 // 登录
 const handleLogin = async () => {
   if (!canLogin.value) return
 
-  loading.value = true
+  loggingIn.value = true
 
   try {
-    // 模拟登录，实际项目中调用TCB云函数或数据库
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // 设置用户信息
-    userStore.setLoginInfo('mock_token_' + Date.now(), {
-      nickname: '同学' + phone.value.slice(-4),
-      avatar: 'https://via.placeholder.com/100',
-      school: school.value
+    const res = await authApi.login({
+      phone: phone.value,
+      code: code.value
     })
 
-    uni.showToast({
-      title: '登录成功',
-      icon: 'success'
-    })
+    if (res.code === 0 && res.data) {
+      const { token, openid, is_new_user, user_info } = res.data
 
-    setTimeout(() => {
-      uni.switchTab({
-        url: '/pages/index/index'
+      // 保存登录信息
+      uni.setStorageSync('token', token)
+      uni.setStorageSync('openid', openid)
+
+      if (is_new_user) {
+        // 新用户，跳转到信息填写页
+        uni.showToast({
+          title: '请完善个人信息',
+          icon: 'none'
+        })
+
+        setTimeout(() => {
+          uni.redirectTo({
+            url: '/pages/register/index'
+          })
+        }, 1000)
+      } else if (user_info) {
+        // 老用户，更新用户信息并跳转首页
+        userStore.setLoginInfo(token, {
+          _id: user_info._id,
+          nickname: user_info.nickname,
+          avatar: user_info.avatar,
+          school_id: user_info.school_id,
+          school_name: user_info.school_name,
+          grade: user_info.grade,
+          hobbies: user_info.hobbies,
+          member_expire_time: user_info.member_expire_time
+        })
+
+        uni.showToast({
+          title: '登录成功',
+          icon: 'success'
+        })
+
+        setTimeout(() => {
+          uni.switchTab({
+            url: '/pages/index/index'
+          })
+        }, 1000)
+      }
+    } else {
+      uni.showToast({
+        title: res.message || '登录失败',
+        icon: 'none'
       })
-    }, 1000)
+    }
   } catch (error) {
     uni.showToast({
       title: '登录失败，请重试',
       icon: 'none'
     })
   } finally {
-    loading.value = false
+    loggingIn.value = false
   }
+}
+
+// 查看协议
+const viewAgreement = (type: 'user' | 'privacy') => {
+  uni.showToast({
+    title: type === 'user' ? '用户协议' : '隐私政策',
+    icon: 'none'
+  })
+  // 实际项目可以跳转到协议页面
 }
 </script>
 

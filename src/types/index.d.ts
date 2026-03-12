@@ -30,11 +30,74 @@ declare global {
     gender?: number
     school?: string
     school_id?: string
-    major?: string
+    school_name?: string
     grade?: string
+    hobbies?: string[]
     member_expire_time?: Date | string
     createTime?: Date
     updateTime?: Date
+  }
+
+  /**
+   * 大学信息
+   */
+  interface University {
+    id: string
+    name: string
+    province: string
+  }
+
+  /**
+   * 年级选项
+   */
+  type Grade = '大一' | '大二' | '大三' | '大四' | '研一' | '研二' | '研三' | '其他'
+
+  /**
+   * 兴趣爱好标签
+   */
+  type Hobby = '学习' | '运动' | '美食' | '娱乐' | '求职' | '摄影' | '音乐' | '旅行' | '游戏' | '阅读'
+
+  /**
+   * 登录请求参数
+   */
+  interface LoginParams {
+    phone: string
+    code: string
+    openid?: string
+  }
+
+  /**
+   * 登录返回数据
+   */
+  interface LoginData {
+    token: string
+    openid: string
+    is_new_user: boolean
+    user_info?: User
+  }
+
+  /**
+   * 注册/更新用户信息参数
+   */
+  interface RegisterParams {
+    user_id?: string
+    phone?: string
+    school_id: string
+    school_name: string
+    grade: string
+    nickname: string
+    avatar: string
+    hobbies?: string[]
+    openid?: string
+  }
+
+  /**
+   * 注销账号参数
+   */
+  interface DeleteAccountParams {
+    user_id?: string
+    openid?: string
+    confirm: boolean
   }
 
   /**

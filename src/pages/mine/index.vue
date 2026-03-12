@@ -16,10 +16,14 @@
 
     <!-- 已登录状态 -->
     <view v-else class="user-header">
-      <image :src="userStore.userInfo?.avatar || ''" class="avatar"></image>
+      <image :src="userStore.userInfo?.avatar || '/static/default-avatar.png'" class="avatar"></image>
       <view class="user-info">
         <text class="nickname">{{ userStore.userInfo?.nickname }}</text>
-        <text class="school">{{ userStore.userInfo?.school }}</text>
+        <text class="school">{{ userStore.userInfo?.school_name || userStore.userInfo?.school }}</text>
+        <view v-if="memberExpireText" class="member-tag">
+          <text class="member-icon">👑</text>
+          <text class="member-text">{{ memberExpireText }}</text>
+        </view>
       </view>
       <view class="edit-btn" @click="goEdit">
         <u-icon name="edit-pen" size="16" color="#2979FF"></u-icon>
@@ -75,7 +79,7 @@
       </view>
     </view>
 
-    <!-- 退出登录 -->
+    <!-- 退出登录/注销账号 -->
     <view v-if="userStore.isLoggedIn" class="logout-area">
       <u-button
         text="退出登录"
@@ -84,21 +88,25 @@
         size="large"
         @click="handleLogout"
       />
+      <view class="delete-account" @click="handleDeleteAccount">
+        <text>注销账号</text>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useUserStore } from '@/store/user'
+import { authApi } from '@/api'
 
 const userStore = useUserStore()
 
 const stats = ref({
-  posts: 12,
-  followers: 256,
-  following: 88,
-  likes: 1024
+  posts: 0,
+  followers: 0,
+  following: 0,
+  likes: 0
 })
 
 const menuGroups = ref([
@@ -118,6 +126,50 @@ const menuGroups = ref([
   ]
 ])
 
+// 会员到期时间显示
+const memberExpireText = computed(() => {
+  if (!userStore.userInfo?.member_expire_time) return ''
+  try {
+    const expireTime = new Date(userStore.userInfo.member_expire_time)
+    const now = new Date()
+    if (expireTime < now) return ''
+
+    const diff = expireTime.getTime() - now.getTime()
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24))
+
+    if (days <= 7) {
+      return `会员还剩${days}天`
+    } else if (days <= 30) {
+      return `会员还剩${days}天`
+    } else {
+      const month = expireTime.getMonth() + 1
+      const day = expireTime.getDate()
+      return `会员至${month}月${day}日`
+    }
+  } catch {
+    return ''
+  }
+})
+
+onMounted(() => {
+  userStore.checkLoginStatus()
+  loadUserInfo()
+})
+
+// 加载用户信息
+const loadUserInfo = async () => {
+  if (!userStore.isLoggedIn) return
+  try {
+    const openid = uni.getStorageSync('openid')
+    const res = await authApi.getUserInfo({ openid })
+    if (res.code === 0 && res.data) {
+      userStore.updateUserInfo(res.data)
+    }
+  } catch (e) {
+    console.error('加载用户信息失败', e)
+  }
+}
+
 const goLogin = () => {
   uni.navigateTo({
     url: '/pages/login/index'
@@ -132,6 +184,7 @@ const handleMenuClick = (item: any) => {
   console.log('点击菜单:', item.name)
 }
 
+// 退出登录
 const handleLogout = () => {
   uni.showModal({
     title: '提示',
@@ -142,6 +195,67 @@ const handleLogout = () => {
       }
     }
   })
+}
+
+// 注销账号
+const handleDeleteAccount = () => {
+  uni.showModal({
+    title: '重要提示',
+    content: '注销账号后，您的所有帖子、评论、个人信息将被永久删除，无法恢复。确定要注销吗？',
+    confirmText: '确定注销',
+    confirmColor: '#ff4d4f',
+    success: (res) => {
+      if (res.confirm) {
+        // 二次确认
+        uni.showModal({
+          title: '最终确认',
+          content: '此操作不可撤销！真的要注销账号吗？',
+          confirmText: '确认',
+          confirmColor: '#ff4d4f',
+          success: async (res2) => {
+            if (res2.confirm) {
+              await doDeleteAccount()
+            }
+          }
+        })
+      }
+    }
+  })
+}
+
+// 执行注销
+const doDeleteAccount = async () => {
+  uni.showLoading({ title: '注销中...' })
+  try {
+    const openid = uni.getStorageSync('openid')
+    const res = await authApi.deleteAccount({
+      openid,
+      confirm: true
+    })
+
+    if (res.code === 0) {
+      uni.hideLoading()
+      uni.showToast({
+        title: '注销成功',
+        icon: 'success'
+      })
+      setTimeout(() => {
+        userStore.logout()
+      }, 1500)
+    } else {
+      uni.hideLoading()
+      uni.showToast({
+        title: res.message || '注销失败',
+        icon: 'none'
+      })
+    }
+  } catch (error) {
+    uni.hideLoading()
+    uni.showToast({
+      title: '注销失败，请重试',
+      icon: 'none'
+    })
+  }
 }
 </script>
 
@@ -203,6 +317,7 @@ const handleLogout = () => {
     height: 120rpx;
     border-radius: 50%;
     border: 4rpx solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
   }
 
   .user-info {
@@ -220,6 +335,26 @@ const handleLogout = () => {
     .school {
       font-size: 26rpx;
       color: rgba(255, 255, 255, 0.9);
+    }
+
+    .member-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6rpx;
+      background: rgba(255, 215, 0, 0.2);
+      padding: 8rpx 16rpx;
+      border-radius: 20rpx;
+      margin-top: 4rpx;
+      width: fit-content;
+
+      .member-icon {
+        font-size: 24rpx;
+      }
+
+      .member-text {
+        font-size: 22rpx;
+        color: #ffd700;
+      }
     }
   }
 
@@ -321,9 +456,22 @@ const handleLogout = () => {
 
 .logout-area {
   padding: 48rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
 
   :deep(.u-button) {
     border-radius: 48rpx;
+  }
+
+  .delete-account {
+    text-align: center;
+    padding: 24rpx;
+
+    text {
+      font-size: 26rpx;
+      color: #999;
+    }
   }
 }
 </style>
