@@ -136,18 +136,39 @@ declare global {
   }
 
   /**
-   * 评论信息
+   * 评论信息（数据库字段）
+   */
+  interface CommentDB {
+    _id?: string
+    post_id: string
+    user_id: string
+    content: string
+    parent_id: string | '0'  // 父评论ID，一级评论为'0'
+    reply_user_id?: string   // 被回复的用户ID
+    like_count?: number
+    create_time?: Date
+    status?: number         // 0=审核通过 1=违规下架
+  }
+
+  /**
+   * 评论信息（前端展示）
    */
   interface Comment {
     _id?: string
-    postId: string
-    userId: string
+    post_id: string
+    user_id: string
     content: string
-    createTime?: Date
+    parent_id: string | '0'
+    reply_user_id?: string
+    reply_nickname?: string   // 被回复的用户昵称
+    like_count?: number
+    create_time?: Date
     // 扩展字段
     nickname?: string
     avatar?: string
     time?: string
+    is_liked?: boolean
+    replies?: Comment[]       // 二级回复列表
   }
 
   /**
@@ -165,6 +186,22 @@ declare global {
    */
   interface GetPostsResponse {
     list: Post[]
+    hasMore: boolean
+    lastCreateTime?: Date
+  }
+
+  /**
+   * 获取帖子详情返回
+   */
+  interface GetPostDetailResponse {
+    post: Post & { user: User }
+  }
+
+  /**
+   * 获取评论列表返回
+   */
+  interface GetCommentsResponse {
+    list: Comment[]
     hasMore: boolean
     lastCreateTime?: Date
   }

@@ -37,15 +37,16 @@
 
 ### 🎯 继续创建其他集合
 
-按同样的步骤，依次创建以下 **5个空集合**：
+按同样的步骤，依次创建以下 **8个空集合**：
 
 | 序号 | 集合名称 | 说明 |
 |------|----------|------|
 | 1 | `users` | 用户表 |
 | 2 | `sms_codes` | 短信验证码表 |
 | 3 | `post` | 帖子表 |
-| 4 | `post_likes` | 点赞记录表 |
-| 5 | `comments` | 评论表 |
+| 4 | `post_likes` | 帖子点赞记录表 |
+| 5 | `comment` | 评论表 |
+| 6 | `comment_likes` | 评论点赞记录表 |
 
 **都是空集合！不要手动加字段！**
 
@@ -69,6 +70,10 @@ C:\Users\15820\app_qiang\cloudfunctions\
 - `getSchoolPosts/`
 - `likePost/`
 - `createPost/`
+- `getPostDetail/` (新增)
+- `getComments/` (新增)
+- `createComment/` (新增)
+- `likeComment/` (新增)
 
 ---
 
@@ -93,7 +98,7 @@ C:\Users\15820\app_qiang\cloudfunctions\
 
 ### 🎯 继续部署其他云函数
 
-按同样的步骤，依次部署以下 **8个云函数**：
+按同样的步骤，依次部署以下 **12个云函数**：
 
 | 序号 | 函数名 | 选择的文件夹 |
 |------|--------|--------------|
@@ -105,6 +110,10 @@ C:\Users\15820\app_qiang\cloudfunctions\
 | 6 | `getSchoolPosts` | `cloudfunctions/getSchoolPosts` |
 | 7 | `likePost` | `cloudfunctions/likePost` |
 | 8 | `createPost` | `cloudfunctions/createPost` |
+| 9 | `getPostDetail` | `cloudfunctions/getPostDetail` |
+| 10 | `getComments` | `cloudfunctions/getComments` |
+| 11 | `createComment` | `cloudfunctions/createComment` |
+| 12 | `likeComment` | `cloudfunctions/likeComment` |
 
 ---
 
@@ -143,9 +152,23 @@ C:\Users\15820\app_qiang\cloudfunctions\
 
 ---
 
+### 🎯 给 `createComment` 加权限
+
+1. 回到「云函数」列表
+2. 找到 `createComment`，点击函数名进入详情
+3. 找到 **「权限配置」** 标签，点击进入
+4. 点击 **「编辑权限」**
+5. 找到并勾选这个权限：
+   - `security.msgSecCheck`（文本内容安全审核）
+6. 点击 **「确定」** 保存
+
+✅ `createComment` 权限配置完成！
+
+---
+
 ### 其他云函数
 
-- `login`、`registerUser`、`getUserInfo`、`deleteAccount`、`getSchoolPosts`、`likePost`
+- `login`、`registerUser`、`getUserInfo`、`deleteAccount`、`getSchoolPosts`、`likePost`、`getPostDetail`、`getComments`、`likeComment`
 - **这些不需要额外权限配置**，保持默认即可
 
 ---
@@ -178,6 +201,7 @@ C:\Users\15820\app_qiang\cloudfunctions\
 **A:**
 1. 确认找的是「权限配置」不是「环境配置」
 2. 如果真的找不到，可能是环境没有开通相关服务，先不管它，不影响基础功能测试
+3. 或者你看到的是「安全规则」页面（JSON格式），那是另一个东西，保持默认就行
 
 ---
 
@@ -185,9 +209,10 @@ C:\Users\15820\app_qiang\cloudfunctions\
 
 部署完成后，检查一下：
 
-- [ ] 数据库有5个空集合：`users`、`sms_codes`、`post`、`post_likes`、`comments`
-- [ ] 云函数列表里有8个函数
+- [ ] 数据库有6个空集合：`users`、`sms_codes`、`post`、`post_likes`、`comment`、`comment_likes`
+- [ ] 云函数列表里有12个函数
 - [ ] `sendSms` 的权限里有 `tcb.sendSms`
 - [ ] `createPost` 的权限里有 `security.msgSecCheck` 和 `security.imgSecCheck`
+- [ ] `createComment` 的权限里有 `security.msgSecCheck`
 
 ✅ **全部完成后，就可以在 HBuilderX 里测试了！**

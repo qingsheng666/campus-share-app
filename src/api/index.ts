@@ -136,6 +136,17 @@ export const postApi = {
   },
 
   /**
+   * 获取帖子详情
+   * @param post_id 帖子ID
+   */
+  async getPostDetail(params: {
+    post_id: string
+    current_user_id?: string
+  }): Promise<CloudResponse<GetPostDetailResponse>> {
+    return await callCloudFunction('getPostDetail', params)
+  },
+
+  /**
    * 获取帖子列表（旧版，兼容用）
    */
   async getPostList(params: {
@@ -179,6 +190,48 @@ export const postApi = {
       .get()
 
     return res.data
+  }
+}
+
+/**
+ * 评论相关API（云函数版）
+ */
+export const commentApi = {
+  /**
+   * 获取评论列表
+   */
+  async getComments(params: {
+    post_id: string
+    page?: number
+    pageSize?: number
+    lastCreateTime?: Date
+    current_user_id?: string
+  }): Promise<CloudResponse<GetCommentsResponse>> {
+    return await callCloudFunction('getComments', params)
+  },
+
+  /**
+   * 发表评论/回复
+   */
+  async createComment(params: {
+    post_id: string
+    content: string
+    parent_id?: string | '0'
+    reply_user_id?: string
+    user_id?: string
+  }): Promise<CloudResponse<{ comment_id: string }>> {
+    return await callCloudFunction('createComment', params)
+  },
+
+  /**
+   * 点赞评论
+   */
+  async likeComment(params: {
+    comment_id: string
+    action?: 'toggle' | 'like' | 'unlike'
+    user_id?: string
+  }): Promise<CloudResponse<LikeResponse>> {
+    return await callCloudFunction('likeComment', params)
   }
 }
 

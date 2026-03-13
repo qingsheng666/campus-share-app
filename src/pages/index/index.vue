@@ -249,7 +249,10 @@ const previewImage = (images: string[], current: number) => {
 
 // 跳转详情
 const goDetail = (id?: string) => {
-  console.log('跳转详情:', id)
+  if (!id) return
+  uni.navigateTo({
+    url: `/pages/post-detail/index?id=${id}`
+  })
 }
 
 // 跳转发布
